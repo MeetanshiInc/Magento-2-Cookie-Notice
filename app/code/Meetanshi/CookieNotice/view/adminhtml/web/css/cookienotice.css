@@ -1,0 +1,6 @@
+ul.tabs.config-tabs a.v-cookienotice-section span { background: url(../images/icon.png) no-repeat 187px 3px; }
+ul.tabs.config-tabs a.v-cookienotice-section.active span { background: #fff url(../images/icon.png) no-repeat 187px 3px; }
+.content-header h3.v-cookienotice-header { background: url(../images/icon.png) no-repeat; padding-left: 31px; }
+.section-config .config .comment .v-cookienotice-notice { border: 1px solid #d6d6d6; padding: 5px; margin-bottom: 5px; background: #fafafa; }
+.section-config .config .comment .v-cookienotice-notice .advice { color: #6f8992; }
+.section-config .config .comment .v-cookienotice-notice a { color: #ea7601; }

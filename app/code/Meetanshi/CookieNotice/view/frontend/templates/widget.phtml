@@ -1,0 +1,153 @@
+<?php if ( $block->enableDisable() ) : ?>
+    <?php
+    if ( $block->getType() == 'v-bar' ) {
+        $width = '93%';
+    } else {
+        $width = 'auto';
+    }
+    $fontFamily = $block->headerTextFontFamily();
+    $fontFamily = str_replace('+', ' ', $fontFamily);
+    $fontFamily = "'" . $fontFamily . "'";
+    ?>
+    <div id="m-cookienotice"
+         class="<?php echo $block->getType(); ?> <?php echo ($block->getType() == 'v-bar') ? $block->getBarPosition() : $block->getBoxPosition(); ?>"
+         style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.47);display:none;text-align:<?php echo $block->modelTextAlign(); ?>;
+                 background-color:<?php echo $block->headerBackgroundColor(); ?>;color:<?php echo $block->headerFontColor(); ?>;
+         <?php if ( $block->modelBorder() ) :
+             ?> border-color:<?php echo $block->modelBorderColor();
+if ( $block->headerBottomBorder() ) :
+    ?>; border-bottom-color:<?php echo $block->headerBottomBorderColor();
+endif;
+if ( $block->containerTopBorder() ) :
+    ?>; border-top-color:<?php echo $block->containerTopBorderColor();
+endif;
+         else :
+             ?>border:0px;<?php
+         endif; ?>;">
+        <div class="m-message title"
+             style="font-weight:bold;width:<?php echo $width ?>;font-size:<?php echo $block->modelTitleFontSize() ?>px;color:<?php echo $block->modelTitleColor(); ?>;font-family:<?php echo $fontFamily; ?>">
+            <span class="titlecookie"
+                  style="border-bottom: 2px solid <?php echo $block->acceptButtonBackgroundColor() ?>;">
+            <?php if ( $block->getShow() == 'default' ) :
+                echo 'Cookies and Privacy';
+            else :
+                echo $block->modelTitle();
+            endif;
+            ?>
+                </span>
+        </div>
+        <div id="message-custom-css" class="m-message custom-css"
+             style="width:<?php echo $width ?>;font-size:<?php echo $block->modelMessageSize(); ?>px;font-family:<?php echo $fontFamily; ?>">
+            <?php if ( $block->getShow() == 'default' ) :
+                echo 'This website use cookies to ensure you get the best user experience on our website.';
+            else :
+                echo $block->getCustomMessage();
+            endif;
+            ?>
+        </div>
+        <div id="action-custom-css" class="m-actions custom-css">
+            <a href="javascript:cookieNoticeAccept();" class="m-button m-accept"
+               style="background-color:<?php echo $block->acceptButtonBackgroundColor() ?>;color:<?php echo $block->acceptButtonColor() ?>">
+                <?php if ( $block->getShow() == 'default' ) :
+                    echo "Accept";
+                else :
+                    echo $block->getCustomAccept();
+                endif;
+                ?>
+            </a>
+            <a href="javascript:cookieClose();" class="m-button m-decline"
+               style="background-color:<?php echo $block->closeButtonBackgroundColor() ?>;color:<?php echo $block->closeButtonColor() ?>">
+                <?php if ( $block->getShow() == 'default' ) :
+                    echo "Decline";
+                else :
+                    echo $block->getCustomDecline();
+                endif;
+                ?>
+            </a>
+            <a href="<?php echo $block->cmsPage(); ?>" target="<?php echo $block->newTab(); ?>" class="m-button"
+               style="background-color:<?php echo $block->policyBackgroundColor() ?>;color:<?php echo $block->privacyPolicyColor() ?>">
+                <?php if ( $block->getShow() == 'default' ) :
+                    echo "Read our Privacy Policy";
+                else :
+                    echo $block->getCustomMoreInfo();
+                endif;
+                ?>
+            </a>
+        </div>
+    </div>
+    <div id="v-badge" class="v-badge" onClick="showDiv()" style="display:none">Cookie Settings</div>
+    <script type="text/javascript">
+        <?php \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->info($block->getBehaviour()); ?>
+        <?php \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->info($block->onscroll()); ?>
+        <?php \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->info($block->getAutoExpire()); ?>
+        var behaviour = <?php echo $block->getBehaviour(); ?>;
+        var onScroll =<?php echo $block->onscroll() ?>;
+        var expire =<?php echo $block->getAutoExpire() ?>;
+        if (expire == 0) {
+            expire = 1;
+        } else {
+            expire =<?php echo $block->getAutoExpire() ?>;
+        }
+
+        if (onScroll == 1) {
+            window.onscroll = function () {
+                custom()
+            };
+        }
+
+        function custom() {
+            if (document.getElementById('m-cookienotice').style.display == 'block') {
+                if (behaviour) {
+                    var d = new Date();
+                    d.setTime(d.getTime() + (behaviour + expire * 24 * 60 * 60 * 1000));
+                    var expires = "expires=" + d.toUTCString();
+
+                }
+                if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+                    document.cookie = "cookienotice" + "=" + "true" + ";" + expires + ";path=/";
+                    document.getElementById('m-cookienotice').style.display = 'none';
+                }
+            }
+        }
+
+        function showDiv() {
+            document.getElementById('m-cookienotice').style.display = "block";
+            document.getElementById('v-badge').style.display = 'none';
+        }
+
+        function cookieClose() {
+            document.getElementById('v-badge').style.display = 'block';
+            document.getElementById('m-cookienotice').style.display = 'none';
+        }
+
+        function cookieNoticeAccept() {
+            if (behaviour) {
+                var d = new Date();
+                d.setTime(d.getTime() + (behaviour + expire * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+
+            }
+            document.cookie = "cookienotice" + "=" + "true" + ";" + expires + ";path=/";
+            document.getElementById('m-cookienotice').style.display = 'none';
+        }
+
+        require([
+            'jquery',
+            'mage/cookies'
+        ], function ($) {
+            if (!$.cookie('cookienotice')) document.getElementById('m-cookienotice').style.display = 'block';
+        });
+
+        <?php if ($block->getAutohide()) : ?>
+        setTimeout(function () {
+            document.getElementById('m-cookienotice').style.display = 'none';
+        }, <?php echo $block->getAutohide() * 1000; ?>);
+        <?php endif; ?>
+        <?php if ($block->getAutoAccept()) : ?>
+        setTimeout(function () {
+            cookieNoticeAccept();
+        }, <?php echo $block->getAutoAccept() * 1000; ?>);
+        <?php endif; ?>
+    </script>
+
+<?php endif; ?>

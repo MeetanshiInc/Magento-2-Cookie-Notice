@@ -1,0 +1,248 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <system>
+        <tab id="meetanshi" translate="label" sortOrder="50">
+            <label><![CDATA[<img src="https://meetanshi.com/media/logo.png" alt="Meetanshi" height="20" style="vertical-align:middle;"/>]]></label>
+        </tab>
+        <section id="cookienotice" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Cookie Notice</label>
+            <tab>meetanshi</tab>
+            <resource>Meetanshi_CookieNotice::cookienotice</resource>
+            <group id="general" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="enabledisable" translate="label" type="select" sortOrder="1010" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable / Disable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="type" translate="label" type="select" sortOrder="1020" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notice Display Type</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Type</source_model>
+                    <depends><field id="enabledisable">1</field></depends>
+                </field>
+                <field id="bar_position" translate="label" type="select" sortOrder="1030" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bar position</label>
+                    <depends>
+                        <field id="type">v-bar</field>
+                        <field id="enabledisable">1</field>
+                    </depends>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Bar\BarPosition</source_model>
+                </field>
+                <field id="box_position" translate="label" type="select" sortOrder="1040" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Box position</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Box\BoxPosition</source_model>
+                    <depends>
+                        <field id="enabledisable">1</field>
+                        <field id="type">v-box</field>
+                     </depends>
+                </field>
+				<field id="onscroll" translate="label" type="select" sortOrder="1065" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Accept Cookie OnScroll</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends><field id="enabledisable">1</field></depends>
+                </field>
+                <field id="behaviour" translate="label" type="select" sortOrder="1050" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>When User closes The Notice</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Behaviour</source_model>
+                    <depends><field id="enabledisable">1</field></depends>
+                </field>
+                <field id="auto_hide_after" translate="label" type="text" sortOrder="1060" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Autohide Cookie Notice After (in seconds)</label>
+                    <validate>required-entry validate-number</validate>
+                   <comment><![CDATA[In Seconds. Set 0 For No Auto Hide]]></comment>
+                    <depends><field id="enabledisable">1</field></depends>
+                </field>
+                <field id="auto_accept" translate="label" type="text" sortOrder="1070" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Accept cookies automatically after X seconds</label>
+                    <validate>required-entry validate-number</validate>
+                    <depends><field id="enabledisable">1</field></depends>
+                </field>
+                <field id="expire" translate="label" type="text" sortOrder="1080" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>expire Cookie Agreement After (Days) *</label>
+                    <validate>required-entry validate-number</validate>
+                    <comment><![CDATA[Days]]></comment>
+                    <depends><field id="enabledisable">1</field></depends>                
+                </field>
+            </group>
+            <group id="content" translate="label" type="text" sortOrder="2000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Content Settings</label>
+                <field id="show" translate="label" type="select" sortOrder="2010" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notice Type</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Message</source_model>
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends>
+                </field>
+                <field id="custom_message" translate="label" type="text" sortOrder="2020" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notice text</label>
+                    <depends>
+                        <field id="show">custom</field>
+                        <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="model_title" translate="label" type="text" sortOrder="2030" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Title</label>
+                    <depends>
+                        <field id="show">custom</field>
+                        <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="custom_accept" translate="label" type="text" sortOrder="2040" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Accept Button text</label>
+                    <depends>
+                            <field id="show">custom</field>
+                            <field id="cookienotice/general/enabledisable">1</field> 
+                    </depends>
+                </field>
+                <field id="custom_close" translate="label" type="text" sortOrder="2050" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Deny Button text</label>
+                    <depends>
+                            <field id="show">custom</field>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="custom_more_info" translate="label" type="text" sortOrder="2060" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Policy Button text</label>
+                    <depends>
+                            <field id="show">custom</field>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="cms_page" translate="label" type="select" sortOrder="2070" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Policy Redirect Information Page</label>
+                    <comment><![CDATA[CMS page with information about cookies and how to manage them.]]></comment>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <depends>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="newtab" translate="label" type="select" sortOrder="2060" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Open Tab In Window</label>
+                    <depends>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                            <field id="enabledisable">1</field>
+                    </depends>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Target</source_model>
+                </field>
+             </group>
+            <group id="popup_style" translate="label" type="text" sortOrder="3000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Container Display Settings</label>
+                 <field id="font_family" translate="label" type="select" sortOrder="3010" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font Family</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Fontfamily</source_model>
+                    <depends>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="model_text_align" translate="label" type="select" sortOrder="3020" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Text Align</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Textalign</source_model>
+                    <depends>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="model_title_size" translate="label" type="select" sortOrder="3030" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Title Text Size</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Fontsize</source_model>
+                    <depends>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="model_message_size" translate="label" type="select" sortOrder="3040" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Message Text Size</label>
+                    <source_model>Meetanshi\CookieNotice\Model\System\Config\Source\Fontsize</source_model>
+                    <depends>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                 <field id="model_border" translate="label" type="select" sortOrder="3050" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Border</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="continer_top_border" translate="label" type="select" sortOrder="3060" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Top Border</label>
+                    <depends>
+                        <field id="model_border">1</field>
+                        <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="container_bottom_border" translate="label" type="select" sortOrder="3070" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Bottom Border</label>
+                    <depends>
+                        <field id="model_border">1</field>
+                        <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+               <field id="header_bottom_border_color" translate="label" type="text" sortOrder="3085" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Bottom Border Color</label>
+                    <depends>
+                            <field id="model_border">1</field>
+                            <field id="container_bottom_border">1</field>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                </field>
+                 <field id="footer_top_border_color" translate="label" type="text" sortOrder="3088" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Top Border Color</label>
+                    <depends>
+                            <field id="model_border">1</field>
+                            <field id="continer_top_border">1</field>
+                            <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                </field>
+                <field id="header_background_color" translate="label" type="text" sortOrder="3090" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Background Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends>
+                        <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                <field id="header_font_color" translate="label" type="text" sortOrder="3100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Message Font Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends>
+                        <field id="cookienotice/general/enabledisable">1</field>
+                    </depends>
+                </field>
+                
+                <field id="accept_button_background_color" translate="label" type="text" sortOrder="3130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Accept Button Background Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model>
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends> 
+                </field>
+                <field id="close_button_background_color" translate="label" type="text" sortOrder="3140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Close Button Background Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends>
+                </field>
+                <field id="policy_button_background_color" translate="label" type="text" sortOrder="3140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Policy Background Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends>
+                </field>
+                <field id="close_button_color" translate="label" type="text" sortOrder="3145" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Close Button Text Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends>
+                </field>
+                <field id="privace_policy_color" translate="label" type="text" sortOrder="3150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Policy Text Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends>
+                </field>
+                <field id="accept_button_color" translate="label" type="text" sortOrder="3160" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Accept Button Text Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends>
+                </field>
+                <field id="model_title_color" translate="label" type="text" sortOrder="3170" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container Title Color</label>
+                    <frontend_model>Meetanshi\CookieNotice\Block\Color</frontend_model> 
+                    <depends><field id="cookienotice/general/enabledisable">1</field></depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
