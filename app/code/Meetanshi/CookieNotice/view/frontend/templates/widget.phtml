@@ -7,7 +7,7 @@
     }
     $fontFamily = $block->headerTextFontFamily();
     $fontFamily = str_replace('+', ' ', $fontFamily);
-    $fontFamily = "'" . $fontFamily . "'";
+    $fontFamily = "font-family:'" . $fontFamily . "';";
     ?>
     <div id="m-cookienotice"
          class="<?php echo $block->getType(); ?> <?php echo ($block->getType() == 'v-bar') ? $block->getBarPosition() : $block->getBoxPosition(); ?>"
@@ -25,7 +25,7 @@ endif;
              ?>border:0px;<?php
          endif; ?>;">
         <div class="m-message title"
-             style="font-weight:bold;width:<?php echo $width ?>;font-size:<?php echo $block->modelTitleFontSize() ?>px;color:<?php echo $block->modelTitleColor(); ?>;font-family:<?php echo $fontFamily; ?>">
+             style="font-weight:bold;width:<?php echo $width ?>;font-size:<?php echo $block->modelTitleFontSize() ?>px;color:<?php echo $block->modelTitleColor(); ?>;<?php echo $fontFamily ?>">
             <span class="titlecookie"
                   style="border-bottom: 2px solid <?php echo $block->acceptButtonBackgroundColor() ?>;">
             <?php if ( $block->getShow() == 'default' ) :
@@ -37,7 +37,7 @@ endif;
                 </span>
         </div>
         <div id="message-custom-css" class="m-message custom-css"
-             style="width:<?php echo $width ?>;font-size:<?php echo $block->modelMessageSize(); ?>px;font-family:<?php echo $fontFamily; ?>">
+             style="width:<?php echo $width ?>;font-size:<?php echo $block->modelMessageSize(); ?>px;<?php echo $fontFamily ?>">
             <?php if ( $block->getShow() == 'default' ) :
                 echo 'This website use cookies to ensure you get the best user experience on our website.';
             else :
