@@ -1,1 +1,3 @@
-<link href="https://fonts.googleapis.com/css?family=<?php echo $block->headerTextFontFamily() ?>" rel="stylesheet">
+<?php if (!empty($block->headerTextFontFamily()) && $block->headerTextFontFamily() !== 'unset'): ?>
+    <link href="https://fonts.googleapis.com/css?family=<?php echo $block->headerTextFontFamily() ?>" rel="stylesheet">
+<?php endif; ?>
