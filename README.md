@@ -2,7 +2,7 @@
 
 Magento 2 Cookie Notice extension lets admin display a cookie notice in the Magento 2 frontend. Aware your store visitors about your privacy policy. The extension allows the users to proceed in the store after accepting the privacy policy.
 
-The ***Magento 2 Cookie Notice*** extension helps to make your store comply with EU's cookie laws. The extension also allows customizing the display of the cookie notice on the frontend. Admin has the option to modify the color, text, background etc., of the notification bar or popup.
+The [***Magento 2 Cookie Notice***](https://meetanshi.com/magento-2-cookie-notice.html) extension helps to make your store comply with EU's cookie laws. The extension also allows customizing the display of the cookie notice on the frontend. Admin has the option to modify the color, text, background etc., of the notification bar or popup.
 
 Win your customers' trust by ensuring them that your business follows GDPR's cookie law. Enable a clean cookie notice with Magento 2 Cookie Notice extension in store frontend.
 
@@ -16,4 +16,4 @@ Win your customers' trust by ensuring them that your business follows GDPR's coo
 * Option to set links to redirect users to cookie policy from the cookie notification bar.
 
 
-Visit, to know more: https://meetanshi.com/magento-2-cookie-notice.html
+Visit, to know more: [https://meetanshi.com/magento-2-cookie-notice.html](https://meetanshi.com/magento-2-cookie-notice.html)
