@@ -1,7 +1,8 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="meetanshi" translate="label" sortOrder="50">
-            <label><![CDATA[<img src="https://meetanshi.com/media/logo.png" alt="Meetanshi" height="20" style="vertical-align:middle;"/>]]></label>
+        <tab id="meetanshi" translate="label" class="meetanshi" sortOrder="100">
+            <label></label>
         </tab>
         <section id="cookienotice" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Cookie Notice</label>
@@ -53,6 +54,7 @@
                 <field id="auto_accept" translate="label" type="text" sortOrder="1070" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Accept cookies automatically after X seconds</label>
                     <validate>required-entry validate-number</validate>
+                    <comment><![CDATA[In Seconds. Set 0 For No Auto Accept Coockie]]></comment>
                     <depends><field id="enabledisable">1</field></depends>
                 </field>
                 <field id="expire" translate="label" type="text" sortOrder="1080" showInDefault="1" showInWebsite="1" showInStore="1">

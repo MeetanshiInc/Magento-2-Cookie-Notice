@@ -4,11 +4,24 @@ namespace Meetanshi\CookieNotice\Model\System\Config\Source;
 
 use Magento\Framework\Option\ArrayInterface;
 
+/**
+ * Class Target
+ * @package Meetanshi\CookieNotice\Model\System\Config\Source
+ */
 class Target implements ArrayInterface
 {
+    /**
+     *
+     */
     const SAME_WINDOW = '_self';
+    /**
+     *
+     */
     const NEW_WINDOW = '_blank';
 
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return [

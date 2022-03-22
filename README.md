@@ -12,7 +12,7 @@ Win your customers' trust by ensuring them that your business follows GDPR's coo
 * Option to customize text, background color, and position of the Magento 2 cookie notice bar or popup.
 * Allow users to accept or close the cookie consent.
 * Option to add CSS style to modify the display of the cookie bar.
-* Auto-hide cookie notice bar or popup after a specific time period. 
+* Auto-hide cookie notice bar or popup after a specific time period.
 * Option to set links to redirect users to cookie policy from the cookie notification bar.
 
 

@@ -10,7 +10,7 @@
                 <behaviour>365</behaviour>
                 <auto_hide_after>0</auto_hide_after>
                 <auto_accept>0</auto_accept>
-                <expire>0</expire>
+                <expire>1</expire>
 				<onscroll>0</onscroll>
             </general>
             <content>
@@ -23,7 +23,7 @@
                 <cms_page>privacy-policy-cookie-restriction-mode</cms_page>
             </content>
              <popup_style>
-                <font_family>vollkorn</font_family>
+                <font_family>Vollkorn</font_family>
                 <model_text_align>left</model_text_align>
                 <model_title_size>small</model_title_size>
                 <model_message_size>small</model_message_size>

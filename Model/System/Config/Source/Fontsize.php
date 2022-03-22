@@ -4,8 +4,15 @@ namespace Meetanshi\CookieNotice\Model\System\Config\Source;
 
 use Magento\Framework\Option\ArrayInterface;
 
+/**
+ * Class Fontsize
+ * @package Meetanshi\CookieNotice\Model\System\Config\Source
+ */
 class Fontsize implements ArrayInterface
 {
+    /**
+     * @return array
+     */
     public function toOptionArray()
     {
         return [
