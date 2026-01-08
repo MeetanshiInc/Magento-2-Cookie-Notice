@@ -1,7 +1,7 @@
+<?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	 <head>
           <css src="Meetanshi_CookieNotice::css/cookienotice.css" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <referenceContainer name="head.additional">
@@ -13,6 +13,5 @@
         <referenceContainer name="before.body.end">
            <block class="Meetanshi\CookieNotice\Block\CookieNotice" name="meetanshi_cookienotice_bottom" after="-" template="Meetanshi_CookieNotice::widget.phtml" />
         </referenceContainer>
-
     </body>
 </page>
