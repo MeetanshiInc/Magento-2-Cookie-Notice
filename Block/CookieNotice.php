@@ -2,15 +2,18 @@
 
 namespace Meetanshi\CookieNotice\Block;
 
-use Meetanshi\CookieNotice\Model\System\Config\Source\Bar\BarPosition;
-use Meetanshi\CookieNotice\Helper\Data;
 use Magento\Framework\View\Element\Template;
-use Magento\Widget\Block\BlockInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Widget\Block\BlockInterface;
+use Meetanshi\CookieNotice\Helper\Data;
+use Meetanshi\CookieNotice\Model\System\Config\Source\Bar\BarPosition;
 
 /**
- * Class CookieNotice
- * @package Meetanshi\CookieNotice\Block
+ * Frontend block for rendering the cookie notice widget.
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
 class CookieNotice extends Template implements BlockInterface
 {
@@ -18,6 +21,7 @@ class CookieNotice extends Template implements BlockInterface
      * @var StoreManagerInterface
      */
     protected $storeManager;
+
     /**
      * @var Data
      */
@@ -25,6 +29,7 @@ class CookieNotice extends Template implements BlockInterface
 
     /**
      * CookieNotice constructor.
+     *
      * @param Template\Context $context
      * @param Data $moduleHelper
      * @param StoreManagerInterface $storeManager
@@ -35,15 +40,18 @@ class CookieNotice extends Template implements BlockInterface
         Data $moduleHelper,
         StoreManagerInterface $storeManager,
         array $data = []
-    ){
+    ) {
         $this->storeManager = $storeManager;
         parent::__construct($context, $data);
         $this->moduleHelper = $moduleHelper;
     }
 
     /**
-     * @return mixed
+     * Get the current store base URL.
+     *
      * @throws \Magento\Framework\Exception\NoSuchEntityException
+     *
+     * @return string
      */
     public function getUrls()
     {
@@ -51,23 +59,33 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Override addData to prevent widget data injection.
+     *
      * @param array $arr
-     * @return $this|void
+     *
+     * @return void
      */
     public function addData(array $arr)
     {
+        // Intentionally empty — prevents widget from overriding block data
     }
 
     /**
+     * Override setData to prevent widget data injection.
+     *
      * @param array|string $key
-     * @param null $value
-     * @return $this|void
+     * @param mixed $value
+     *
+     * @return void
      */
     public function setData($key, $value = null)
     {
+        // Intentionally empty — prevents widget from overriding block data
     }
 
     /**
+     * Check if cookie notice is enabled.
+     *
      * @return mixed
      */
     public function enableDisable()
@@ -76,6 +94,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get cookie notice type.
+     *
      * @return mixed
      */
     public function getType()
@@ -84,6 +104,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get bar position setting.
+     *
      * @return mixed
      */
     public function getBarPosition()
@@ -92,6 +114,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get box position setting.
+     *
      * @return mixed
      */
     public function getBoxPosition()
@@ -100,6 +124,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get behaviour setting.
+     *
      * @return mixed
      */
     public function getBehaviour()
@@ -108,6 +134,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get auto hide delay value.
+     *
      * @return mixed
      */
     public function getAutohide()
@@ -116,6 +144,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get auto accept delay value.
+     *
      * @return mixed
      */
     public function getAutoAccept()
@@ -124,6 +154,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get cookie expiration value.
+     *
      * @return mixed
      */
     public function getAutoExpire()
@@ -132,6 +164,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get show setting (default or custom).
+     *
      * @return mixed
      */
     public function getShow()
@@ -140,6 +174,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get custom message text.
+     *
      * @return mixed
      */
     public function getCustomMessage()
@@ -148,6 +184,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get custom more info link text.
+     *
      * @return mixed
      */
     public function getCustomMoreInfo()
@@ -156,6 +194,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get CMS page identifier.
+     *
      * @return mixed
      */
     public function cmsPage()
@@ -164,6 +204,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get custom accept button text.
+     *
      * @return mixed
      */
     public function getCustomAccept()
@@ -172,6 +214,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get custom decline button text.
+     *
      * @return mixed
      */
     public function getCustomDecline()
@@ -180,6 +224,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get accept button background color.
+     *
      * @return mixed
      */
     public function acceptButtonBackgroundColor()
@@ -188,6 +234,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get accept button text color.
+     *
      * @return mixed
      */
     public function acceptButtonColor()
@@ -196,6 +244,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get privacy policy link color.
+     *
      * @return mixed
      */
     public function privacyPolicyColor()
@@ -204,6 +254,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get close button background color.
+     *
      * @return mixed
      */
     public function closeButtonBackgroundColor()
@@ -212,6 +264,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get on scroll setting.
+     *
      * @return mixed
      */
     public function onscroll()
@@ -220,6 +274,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get new tab target setting.
+     *
      * @return mixed
      */
     public function newTab()
@@ -228,6 +284,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get close button text color.
+     *
      * @return mixed
      */
     public function closeButtonColor()
@@ -236,6 +294,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get header background color.
+     *
      * @return mixed
      */
     public function headerBackgroundColor()
@@ -244,6 +304,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get header font color.
+     *
      * @return mixed
      */
     public function headerFontColor()
@@ -252,6 +314,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get model border setting.
+     *
      * @return mixed
      */
     public function modelBorder()
@@ -260,6 +324,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get model border color.
+     *
      * @return mixed
      */
     public function modelBorderColor()
@@ -268,6 +334,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get header bottom border setting.
+     *
      * @return mixed
      */
     public function headerBottomBorder()
@@ -276,6 +344,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get header bottom border color.
+     *
      * @return mixed
      */
     public function headerBottomBorderColor()
@@ -284,6 +354,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get container top border setting.
+     *
      * @return mixed
      */
     public function containerTopBorder()
@@ -292,6 +364,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get policy button background color.
+     *
      * @return mixed
      */
     public function policyBackgroundColor()
@@ -300,6 +374,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get container top border color.
+     *
      * @return mixed
      */
     public function containerTopBorderColor()
@@ -308,6 +384,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get header text font family.
+     *
      * @return mixed
      */
     public function headerTextFontFamily()
@@ -316,6 +394,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get model title text.
+     *
      * @return mixed
      */
     public function modelTitle()
@@ -324,6 +404,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get model title color.
+     *
      * @return mixed
      */
     public function modelTitleColor()
@@ -332,6 +414,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get model title font size.
+     *
      * @return mixed
      */
     public function modelTitleFontSize()
@@ -340,6 +424,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get model message font size.
+     *
      * @return mixed
      */
     public function modelMessageSize()
@@ -348,6 +434,8 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Get model text alignment.
+     *
      * @return mixed
      */
     public function modelTextAlign()
@@ -356,11 +444,13 @@ class CookieNotice extends Template implements BlockInterface
     }
 
     /**
+     * Render block HTML only when conditions are met.
+     *
      * @return string
      */
     public function toHtml()
     {
-        if ( !$this->moduleHelper->enableDisable() ||
+        if (!$this->moduleHelper->enableDisable() ||
             ($this->getNameInLayout() == 'meetanshi_cookienotice_top'
                 && $this->moduleHelper->getBarPosition() != BarPosition::TOP)
             || ($this->getNameInLayout() == 'meetanshi_cookienotice_bottom'
@@ -368,6 +458,7 @@ class CookieNotice extends Template implements BlockInterface
         ) {
             return '';
         }
+
         return parent::toHtml();
     }
 }

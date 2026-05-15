@@ -5,12 +5,13 @@ namespace Meetanshi\CookieNotice\Model\System\Config\Source;
 use Magento\Framework\Option\ArrayInterface;
 
 /**
- * Class Fontfamily
- * @package Meetanshi\CookieNotice\Model\System\Config\Source
+ * Source model for font family options.
  */
 class Fontfamily implements ArrayInterface
 {
     /**
+     * Return array of font family options.
+     *
      * @return array
      */
     public function toOptionArray()

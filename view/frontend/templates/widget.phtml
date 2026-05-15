@@ -1,112 +1,190 @@
-<?php if ( $block->enableDisable() ) : ?>
+<?php
+/** @var \Meetanshi\CookieNotice\Block\CookieNotice $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php if ($block->enableDisable()): ?>
     <?php
-    if ( $block->getType() == 'v-bar' ) {
-        $width = '93%';
-    } else {
-        $width = 'auto';
-    }
+    $width = ($block->getType() == 'v-bar') ? '93%' : 'auto';
     $fontFamily = $block->headerTextFontFamily();
     $fontFamily = str_replace('+', ' ', $fontFamily);
     $fontFamily = "'" . $fontFamily . "'";
+    $bgColor = $escaper->escapeHtmlAttr($block->headerBackgroundColor());
+    $fontColor = $escaper->escapeHtmlAttr($block->headerFontColor());
+    $textAlign = $escaper->escapeHtmlAttr($block->modelTextAlign());
+    $type = $escaper->escapeHtmlAttr($block->getType());
+    $position = $escaper->escapeHtmlAttr(
+        ($block->getType() == 'v-bar')
+            ? $block->getBarPosition()
+            : $block->getBoxPosition()
+    );
     ?>
 <div class="cookie-div">
+    <?php
+    $borderStyle = '';
+    if ($block->modelBorder()) {
+        $borderStyle = 'border-color:'
+            . $escaper->escapeHtmlAttr($block->modelBorderColor());
+        if ($block->headerBottomBorder()) {
+            $borderStyle .= ';border-bottom-color:'
+                . $escaper->escapeHtmlAttr(
+                    $block->headerBottomBorderColor()
+                );
+        }
+        if ($block->containerTopBorder()) {
+            $borderStyle .= ';border-top-color:'
+                . $escaper->escapeHtmlAttr(
+                    $block->containerTopBorderColor()
+                );
+        }
+    } else {
+        $borderStyle = 'border:0px';
+    }
+    $containerStyle = 'box-shadow:0px 2px 5px 0px rgba(0,0,0,0.47);'
+        . 'display:none;'
+        . 'text-align:' . $textAlign . ';'
+        . 'background-color:' . $bgColor . ';'
+        . 'color:' . $fontColor . ';'
+        . $borderStyle;
+    ?>
     <div id="m-cookienotice"
-         class="<?php echo $block->getType(); ?> <?php echo ($block->getType() == 'v-bar') ? $block->getBarPosition() : $block->getBoxPosition(); ?>"
-         style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.47);display:none;text-align:<?php echo $block->modelTextAlign(); ?>;
-                 background-color:<?php echo $block->headerBackgroundColor(); ?>;color:<?php echo $block->headerFontColor(); ?>;
-         <?php if ( $block->modelBorder() ) :
-             ?> border-color:<?php echo $block->modelBorderColor();
-if ( $block->headerBottomBorder() ) :
-    ?>; border-bottom-color:<?php echo $block->headerBottomBorderColor();
-endif;
-if ( $block->containerTopBorder() ) :
-    ?>; border-top-color:<?php echo $block->containerTopBorderColor();
-endif;
-         else :
-             ?>border:0px;<?php
-         endif; ?>;">
+         class="<?= /* @noEscape */ $type ?> <?= /* @noEscape */ $position ?>"
+         style="<?= /* @noEscape */ $containerStyle ?>;">
+        <?php
+        $titleSize = $escaper->escapeHtmlAttr(
+            $block->modelTitleFontSize()
+        );
+        $titleColor = $escaper->escapeHtmlAttr(
+            $block->modelTitleColor()
+        );
+        $titleFont = $escaper->escapeHtmlAttr(
+            $block->headerTextFontFamily()
+        );
+        $titleStyle = 'font-weight:bold;'
+            . 'width:' . $width . ';'
+            . 'font-size:' . $titleSize . 'px;'
+            . 'color:' . $titleColor . ';'
+            . 'font-family:' . $titleFont;
+        $acceptBg = $escaper->escapeHtmlAttr(
+            $block->acceptButtonBackgroundColor()
+        );
+        ?>
         <div class="m-message title"
-             style="font-weight:bold;width:<?php echo $width ?>;font-size:<?php echo $block->modelTitleFontSize() ?>px;color:<?php echo $block->modelTitleColor(); ?>;font-family:<?php echo $block->headerTextFontFamily(); ?>">
+             style="<?= /* @noEscape */ $titleStyle ?>">
             <span class="titlecookie"
-                  style="border-bottom: 2px solid <?php echo $block->acceptButtonBackgroundColor() ?>;">
-            <?php if ( $block->getShow() == 'default' ) :
+                  style="border-bottom:2px solid <?= /* @noEscape */ $acceptBg ?>;">
+            <?php if ($block->getShow() == 'default'):
                 echo 'Cookies and Privacy';
-            else :
-                echo $block->modelTitle();
-            endif;
-            ?>
-                </span>
+            else:
+                echo $escaper->escapeHtml($block->modelTitle());
+            endif; ?>
+            </span>
         </div>
+        <?php
+        $msgSize = $escaper->escapeHtmlAttr($block->modelMessageSize());
+        $msgStyle = 'width:' . $width . ';'
+            . 'font-size:' . $msgSize . 'px;'
+            . 'font-family:' . $fontFamily;
+        ?>
         <div id="message-custom-css" class="m-message custom-css"
-             style="width:<?php echo $width ?>;font-size:<?php echo $block->modelMessageSize(); ?>px;font-family:<?php echo $fontFamily; ?>">
-            <?php if ( $block->getShow() == 'default' ) :
+             style="<?= /* @noEscape */ $msgStyle ?>">
+            <?php if ($block->getShow() == 'default'):
                 echo 'This website use cookies to ensure you get the best user experience on our website.';
-            else :
-                echo $block->getCustomMessage();
-            endif;
-            ?>
+            else:
+                echo $escaper->escapeHtml($block->getCustomMessage());
+            endif; ?>
         </div>
         <div id="action-custom-css" class="m-actions custom-css">
-            <a href="javascript:cookieNoticeAccept();" class="m-button m-accept"
-               style="background-color:<?php echo $block->acceptButtonBackgroundColor() ?>;color:<?php echo $block->acceptButtonColor() ?>">
-                <?php if ( $block->getShow() == 'default' ) :
+            <?php
+            $acceptStyle = 'background-color:'
+                . $acceptBg . ';color:'
+                . $escaper->escapeHtmlAttr($block->acceptButtonColor());
+            ?>
+            <a href="javascript:cookieNoticeAccept();"
+               class="m-button m-accept"
+               style="<?= /* @noEscape */ $acceptStyle ?>">
+                <?php if ($block->getShow() == 'default'):
                     echo "Accept";
-                else :
-                    echo $block->getCustomAccept();
-                endif;
-                ?>
+                else:
+                    echo $escaper->escapeHtml($block->getCustomAccept());
+                endif; ?>
             </a>
-            <a href="javascript:cookieClose();" class="m-button m-decline"
-               style="background-color:<?php echo $block->closeButtonBackgroundColor() ?>;color:<?php echo $block->closeButtonColor() ?>">
-                <?php if ( $block->getShow() == 'default' ) :
+            <?php
+            $closeStyle = 'background-color:'
+                . $escaper->escapeHtmlAttr($block->closeButtonBackgroundColor())
+                . ';color:'
+                . $escaper->escapeHtmlAttr($block->closeButtonColor());
+            ?>
+            <a href="javascript:cookieClose();"
+               class="m-button m-decline"
+               style="<?= /* @noEscape */ $closeStyle ?>">
+                <?php if ($block->getShow() == 'default'):
                     echo "Decline";
-                else :
-                    echo $block->getCustomDecline();
-                endif;
-                ?>
+                else:
+                    echo $escaper->escapeHtml($block->getCustomDecline());
+                endif; ?>
             </a>
-            <a href="<?php echo $block->getUrls().$block->cmsPage(); ?>" target="<?php echo $block->newTab(); ?>" class="m-button"
-               style="background-color:<?php echo $block->policyBackgroundColor() ?>;color:<?php echo $block->privacyPolicyColor() ?>">
-                <?php if ( $block->getShow() == 'default' ) :
+            <?php
+            $policyUrl = $escaper->escapeUrl(
+                $block->getUrls() . $block->cmsPage()
+            );
+            $policyTarget = $escaper->escapeHtmlAttr($block->newTab());
+            $policyStyle = 'background-color:'
+                . $escaper->escapeHtmlAttr($block->policyBackgroundColor())
+                . ';color:'
+                . $escaper->escapeHtmlAttr($block->privacyPolicyColor());
+            ?>
+            <a href="<?= /* @noEscape */ $policyUrl ?>"
+               target="<?= /* @noEscape */ $policyTarget ?>"
+               class="m-button"
+               style="<?= /* @noEscape */ $policyStyle ?>">
+                <?php if ($block->getShow() == 'default'):
                     echo "Read our Privacy Policy";
-                else :
-                    echo $block->getCustomMoreInfo();
-                endif;
-                ?>
+                else:
+                    echo $escaper->escapeHtml($block->getCustomMoreInfo());
+                endif; ?>
             </a>
         </div>
     </div>
 </div>
-    <div id="v-badge" class="v-badge" onClick="showDiv()" style="display:none">Cookie Settings</div>
-    <script type="text/javascript">
-        var behaviour = <?php echo $block->getBehaviour(); ?>;
-        var onScroll ='<?php echo $block->onscroll() ?>';
-        var expire ='<?php echo $block->getAutoExpire() ?>';
+    <div id="v-badge" class="v-badge"
+         onClick="showDiv()" style="display:none">
+        Cookie Settings
+    </div>
+    <script>
+        var behaviour = <?= /* @noEscape */ (int)$block->getBehaviour() ?>;
+        var onScroll = '<?= $escaper->escapeJs($block->onscroll()) ?>';
+        var expire = '<?= $escaper->escapeJs($block->getAutoExpire()) ?>';
         if (expire === 0 || expire === '0') {
             expire = 1;
         } else {
-            expire =<?php echo $block->getAutoExpire() ?>;
+            expire = <?= /* @noEscape */ (int)$block->getAutoExpire() ?>;
         }
 
         if (onScroll === 1 || onScroll === '1') {
             window.onscroll = function () {
-                if (!jQuery.cookie('cookienotice') || jQuery.cookie('cookienotice') === '0') {
+                if (!jQuery.cookie('cookienotice')
+                    || jQuery.cookie('cookienotice') === '0'
+                ) {
                     custom();
                 }
             };
         }
 
         function custom() {
-            if (document.getElementById('m-cookienotice').style.display = 'block') {
+            var el = document.getElementById('m-cookienotice');
+            if (el.style.display = 'block') {
                 if (behaviour) {
                     var d = new Date();
-                    d.setTime(d.getTime() + (behaviour + expire * 24 * 60 * 60 * 1000));
+                    d.setTime(d.getTime()
+                        + (behaviour + expire * 24 * 60 * 60 * 1000));
                     var expires = "expires=" + d.toUTCString();
-
                 }
-                if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
-                    document.cookie = "cookienotice" + "=" + "true" + ";" + expires + ";path=/";
-                    document.getElementById('m-cookienotice').style.display = 'none';
+                if (document.body.scrollTop > 150
+                    || document.documentElement.scrollTop > 150
+                ) {
+                    document.cookie = "cookienotice=true;"
+                        + expires + ";path=/";
+                    el.style.display = 'none';
                 }
             }
         }
@@ -114,21 +192,23 @@ endif;
         function showDiv() {
             document.getElementById('m-cookienotice').style.display = "block";
             document.getElementById('v-badge').style.display = 'none';
-            <?php if ($block->getAutohide()) : ?>
+            <?php if ($block->getAutohide()): ?>
+            var hideDelay = <?= /* @noEscape */ (int)$block->getAutohide() * 1000 ?>;
             setTimeout(function () {
                 document.getElementById('m-cookienotice').style.display = 'none';
                 document.getElementById('v-badge').style.display = 'block';
-            }, <?php echo $block->getAutohide() * 1000; ?>);
+            }, hideDelay);
             <?php endif; ?>
         }
 
         function cookieClose() {
             if (behaviour) {
                 var d = new Date();
-                d.setTime(d.getTime() + (behaviour + expire * 24 * 60 * 60 * 1000));
+                d.setTime(d.getTime()
+                    + (behaviour + expire * 24 * 60 * 60 * 1000));
                 var expires = "expires=" + d.toUTCString();
             }
-            document.cookie = "cookienotice" + "=" + "0" + ";" + expires + ";path=/";
+            document.cookie = "cookienotice=0;" + expires + ";path=/";
             document.getElementById('v-badge').style.display = 'block';
             document.getElementById('m-cookienotice').style.display = 'none';
         }
@@ -136,10 +216,11 @@ endif;
         function cookieNoticeAccept() {
             if (behaviour) {
                 var d = new Date();
-                d.setTime(d.getTime() + (behaviour + expire * 24 * 60 * 60 * 1000));
+                d.setTime(d.getTime()
+                    + (behaviour + expire * 24 * 60 * 60 * 1000));
                 var expires = "expires=" + d.toUTCString();
             }
-            document.cookie = "cookienotice" + "=" + "true" + ";" + expires + ";path=/";
+            document.cookie = "cookienotice=true;" + expires + ";path=/";
             document.getElementById('m-cookienotice').style.display = 'none';
         }
 
@@ -147,24 +228,28 @@ endif;
             'jquery',
             'mage/cookies'
         ], function ($) {
-            if ($.cookie('cookienotice') === '0' || $.cookie('cookienotice') === 0){
+            if ($.cookie('cookienotice') === '0'
+                || $.cookie('cookienotice') === 0
+            ) {
                 document.getElementById('v-badge').style.display = 'block';
             }
-            if (!$.cookie('cookienotice')){
+            if (!$.cookie('cookienotice')) {
                 document.getElementById('m-cookienotice').style.display = 'block';
             }
         });
 
-        <?php if ($block->getAutohide()) : ?>
+        <?php if ($block->getAutohide()): ?>
+        var autoHideDelay = <?= /* @noEscape */ (int)$block->getAutohide() * 1000 ?>;
         setTimeout(function () {
             document.getElementById('m-cookienotice').style.display = 'none';
             document.getElementById('v-badge').style.display = 'block';
-        }, <?php echo $block->getAutohide() * 1000; ?>);
+        }, autoHideDelay);
         <?php endif; ?>
-        <?php if ($block->getAutoAccept()) : ?>
+        <?php if ($block->getAutoAccept()): ?>
+        var autoAcceptDelay = <?= /* @noEscape */ (int)$block->getAutoAccept() * 1000 ?>;
         setTimeout(function () {
             cookieNoticeAccept();
-        }, <?php echo $block->getAutoAccept() * 1000; ?>);
+        }, autoAcceptDelay);
         <?php endif; ?>
     </script>
 

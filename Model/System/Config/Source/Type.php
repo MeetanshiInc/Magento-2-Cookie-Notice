@@ -5,19 +5,20 @@ namespace Meetanshi\CookieNotice\Model\System\Config\Source;
 use Magento\Framework\Option\ArrayInterface;
 
 /**
- * Class Type
- * @package Meetanshi\CookieNotice\Model\System\Config\Source
+ * Source model for cookie notice type options.
  */
 class Type implements ArrayInterface
 {
     /**
+     * Return array of notice type options.
+     *
      * @return array
      */
     public function toOptionArray()
     {
         return [
             ['value' => 'v-bar', 'label' => __('Bar')],
-            ['value' => 'v-box', 'label' => __('Popup')]
+            ['value' => 'v-box', 'label' => __('Popup')],
         ];
     }
 }

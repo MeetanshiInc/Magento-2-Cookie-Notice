@@ -5,12 +5,13 @@ namespace Meetanshi\CookieNotice\Model\System\Config\Source;
 use Magento\Framework\Option\ArrayInterface;
 
 /**
- * Class Behaviour
- * @package Meetanshi\CookieNotice\Model\System\Config\Source
+ * Source model for cookie notice behaviour options.
  */
 class Behaviour implements ArrayInterface
 {
     /**
+     * Return array of behaviour options.
+     *
      * @return array
      */
     public function toOptionArray()
@@ -18,7 +19,7 @@ class Behaviour implements ArrayInterface
         return [
             ['value' => 365, 'label' => 'Never show again'],
             ['value' => 1, 'label' => 'Hide for the rest of the day'],
-            ['value' => 0, 'label' => 'Hide for the rest of the session']
+            ['value' => 0, 'label' => 'Hide for the rest of the session'],
         ];
     }
 }

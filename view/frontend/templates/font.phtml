@@ -1,1 +1,7 @@
-<link href="https://fonts.googleapis.com/css?family=<?php echo $block->headerTextFontFamily() ?>" rel="stylesheet">
+<?php
+/** @var \Meetanshi\CookieNotice\Block\CookieNotice $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$fontFamily = $escaper->escapeUrl($block->headerTextFontFamily());
+?>
+<link href="https://fonts.googleapis.com/css?family=<?= /* @noEscape */ $fontFamily ?>"
+      rel="stylesheet">

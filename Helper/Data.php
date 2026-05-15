@@ -7,167 +7,267 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Class Data
- * @package Meetanshi\CookieNotice\Helper
+ * Cookie Notice helper for retrieving module configuration values.
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class Data extends AbstractHelper
 {
     /**
+     * Configuration path for enable/disable setting
      *
+     * @var string
      */
-    const ENABLE_DISABLE = 'cookienotice/general/enabledisable';
-    /**
-     *
-     */
-    const TYPE = 'cookienotice/general/type';
-    /**
-     *
-     */
-    const BAR_POSITION = 'cookienotice/general/bar_position';
-    /**
-     *
-     */
-    const BOX_POSITION = 'cookienotice/general/box_position';
-    /**
-     *
-     */
-    const BEHAVIOUR = 'cookienotice/general/behaviour';
-    /**
-     *
-     */
-    const AUTO_HIDE_AFTER = 'cookienotice/general/auto_hide_after';
-    /**
-     *
-     */
-    const AUTO_ACCEPT = 'cookienotice/general/auto_accept';
-    /**
-     *
-     */
-    const EXPIRE = 'cookienotice/general/expire';
-    /**
-     *
-     */
-    const SHOW = 'cookienotice/content/show';
-    /**
-     *
-     */
-    const CUSTOM_MESSAGE = 'cookienotice/content/custom_message';
-    /**
-     *
-     */
-    const MODEL_TITLE = 'cookienotice/content/model_title';
-    /**
-     *
-     */
-    const CUSTOM_ACCEPT = 'cookienotice/content/custom_accept';
-    /**
-     *
-     */
-    const CUSTOM_CLOSE = 'cookienotice/content/custom_close';
-    /**
-     *
-     */
-    const CUSTOM_MORE_INFO = 'cookienotice/content/custom_more_info';
-    /**
-     *
-     */
-    const NEWTAB = 'cookienotice/content/newtab';
-    /**
-     *
-     */
-    const CMS_PAGE = 'cookienotice/content/cms_page';
-    /**
-     *
-     */
-    const ONSCROLL = 'cookienotice/general/onscroll';
-    /**
-     *
-     */
-    const FONT_FAMILY = 'cookienotice/popup_style/font_family';
-    /**
-     *
-     */
-    const MODEL_TEXT_ALIGN = 'cookienotice/popup_style/model_text_align';
-    /**
-     *
-     */
-    const MODEL_TITLE_SIZE = 'cookienotice/popup_style/model_title_size';
-    /**
-     *
-     */
-    const MODEL_BORDER = 'cookienotice/popup_style/model_border';
-    /**
-     *
-     */
-    const FOOTER_TOP_BORDER = 'cookienotice/popup_style/continer_top_border';
-    /**
-     *
-     */
-    const HEADER_BOTTOM_BORDER = 'cookienotice/popup_style/container_bottom_border';
-    /**
-     *
-     */
-    const MODEL_BORDER_COLOR = 'cookienotice/popup_style/container_border_color';
-    /**
-     *
-     */
-    const MODEL_MESSAGE_SIZE = 'cookienotice/popup_style/model_message_size';
-    /**
-     *
-     */
-    const HEADER_BACKGROUND_COLOR = 'cookienotice/popup_style/header_background_color';
-    /**
-     *
-     */
-    const HEADER_FONT_COLOR = 'cookienotice/popup_style/header_font_color';
-    /**
-     *
-     */
-    const HEADER_BOTTOM_BORDER_COLOR = 'cookienotice/popup_style/header_bottom_border_color';
-    /**
-     *
-     */
-    const FOOTER_TOP_BORDER_COLOR = 'cookienotice/popup_style/footer_top_border_color';
-    /**
-     *
-     */
-    const ACCEPT_BUTTON_BACKGROUND_COLOR = 'cookienotice/popup_style/accept_button_background_color';
-    /**
-     *
-     */
-    const CLOSE_BUTTON_BACKGROUND_COLOR = 'cookienotice/popup_style/close_button_background_color';
-    /**
-     *
-     */
-    const POLICY_BACKGROUND_COLOR = 'cookienotice/popup_style/policy_button_background_color';
-    /**
-     *
-     */
-    const CLOSE_BUTTON_COLOR = 'cookienotice/popup_style/close_button_color';
-    /**
-     *
-     */
-    const PRIVACY_POLICY_COLOR = 'cookienotice/popup_style/privace_policy_color';
-    /**
-     *
-     */
-    const ACCEPT_BUTTON_COLOR = 'cookienotice/popup_style/accept_button_color';
-    /**
-     *
-     */
-    const MODEL_TITLE_COLOR = 'cookienotice/popup_style/model_title_color';
+    public const ENABLE_DISABLE = 'cookienotice/general/enabledisable';
 
     /**
-     * Data constructor.
-     * @param Context $context
+     * Configuration path for notice type
+     *
+     * @var string
      */
-    public function __construct(
-        Context $context
-    ){
-        parent::__construct($context);
-    }
+    public const TYPE = 'cookienotice/general/type';
 
     /**
+     * Configuration path for bar position
+     *
+     * @var string
+     */
+    public const BAR_POSITION = 'cookienotice/general/bar_position';
+
+    /**
+     * Configuration path for box position
+     *
+     * @var string
+     */
+    public const BOX_POSITION = 'cookienotice/general/box_position';
+
+    /**
+     * Configuration path for behaviour
+     *
+     * @var string
+     */
+    public const BEHAVIOUR = 'cookienotice/general/behaviour';
+
+    /**
+     * Configuration path for auto hide delay
+     *
+     * @var string
+     */
+    public const AUTO_HIDE_AFTER = 'cookienotice/general/auto_hide_after';
+
+    /**
+     * Configuration path for auto accept
+     *
+     * @var string
+     */
+    public const AUTO_ACCEPT = 'cookienotice/general/auto_accept';
+
+    /**
+     * Configuration path for cookie expiration
+     *
+     * @var string
+     */
+    public const EXPIRE = 'cookienotice/general/expire';
+
+    /**
+     * Configuration path for show setting
+     *
+     * @var string
+     */
+    public const SHOW = 'cookienotice/content/show';
+
+    /**
+     * Configuration path for custom message
+     *
+     * @var string
+     */
+    public const CUSTOM_MESSAGE = 'cookienotice/content/custom_message';
+
+    /**
+     * Configuration path for model title
+     *
+     * @var string
+     */
+    public const MODEL_TITLE = 'cookienotice/content/model_title';
+
+    /**
+     * Configuration path for custom accept text
+     *
+     * @var string
+     */
+    public const CUSTOM_ACCEPT = 'cookienotice/content/custom_accept';
+
+    /**
+     * Configuration path for custom close text
+     *
+     * @var string
+     */
+    public const CUSTOM_CLOSE = 'cookienotice/content/custom_close';
+
+    /**
+     * Configuration path for custom more info text
+     *
+     * @var string
+     */
+    public const CUSTOM_MORE_INFO = 'cookienotice/content/custom_more_info';
+
+    /**
+     * Configuration path for new tab setting
+     *
+     * @var string
+     */
+    public const NEWTAB = 'cookienotice/content/newtab';
+
+    /**
+     * Configuration path for CMS page
+     *
+     * @var string
+     */
+    public const CMS_PAGE = 'cookienotice/content/cms_page';
+
+    /**
+     * Configuration path for on scroll setting
+     *
+     * @var string
+     */
+    public const ONSCROLL = 'cookienotice/general/onscroll';
+
+    /**
+     * Configuration path for font family
+     *
+     * @var string
+     */
+    public const FONT_FAMILY = 'cookienotice/popup_style/font_family';
+
+    /**
+     * Configuration path for text alignment
+     *
+     * @var string
+     */
+    public const MODEL_TEXT_ALIGN = 'cookienotice/popup_style/model_text_align';
+
+    /**
+     * Configuration path for title font size
+     *
+     * @var string
+     */
+    public const MODEL_TITLE_SIZE = 'cookienotice/popup_style/model_title_size';
+
+    /**
+     * Configuration path for model border
+     *
+     * @var string
+     */
+    public const MODEL_BORDER = 'cookienotice/popup_style/model_border';
+
+    /**
+     * Configuration path for footer top border
+     *
+     * @var string
+     */
+    public const FOOTER_TOP_BORDER = 'cookienotice/popup_style/continer_top_border';
+
+    /**
+     * Configuration path for header bottom border
+     *
+     * @var string
+     */
+    public const HEADER_BOTTOM_BORDER = 'cookienotice/popup_style/container_bottom_border';
+
+    /**
+     * Configuration path for model border color
+     *
+     * @var string
+     */
+    public const MODEL_BORDER_COLOR = 'cookienotice/popup_style/container_border_color';
+
+    /**
+     * Configuration path for model message font size
+     *
+     * @var string
+     */
+    public const MODEL_MESSAGE_SIZE = 'cookienotice/popup_style/model_message_size';
+
+    /**
+     * Configuration path for header background color
+     *
+     * @var string
+     */
+    public const HEADER_BACKGROUND_COLOR = 'cookienotice/popup_style/header_background_color';
+
+    /**
+     * Configuration path for header font color
+     *
+     * @var string
+     */
+    public const HEADER_FONT_COLOR = 'cookienotice/popup_style/header_font_color';
+
+    /**
+     * Configuration path for header bottom border color
+     *
+     * @var string
+     */
+    public const HEADER_BOTTOM_BORDER_COLOR = 'cookienotice/popup_style/header_bottom_border_color';
+
+    /**
+     * Configuration path for footer top border color
+     *
+     * @var string
+     */
+    public const FOOTER_TOP_BORDER_COLOR = 'cookienotice/popup_style/footer_top_border_color';
+
+    /**
+     * Configuration path for accept button background color
+     *
+     * @var string
+     */
+    public const ACCEPT_BUTTON_BACKGROUND_COLOR = 'cookienotice/popup_style/accept_button_background_color';
+
+    /**
+     * Configuration path for close button background color
+     *
+     * @var string
+     */
+    public const CLOSE_BUTTON_BACKGROUND_COLOR = 'cookienotice/popup_style/close_button_background_color';
+
+    /**
+     * Configuration path for policy button background color
+     *
+     * @var string
+     */
+    public const POLICY_BACKGROUND_COLOR = 'cookienotice/popup_style/policy_button_background_color';
+
+    /**
+     * Configuration path for close button text color
+     *
+     * @var string
+     */
+    public const CLOSE_BUTTON_COLOR = 'cookienotice/popup_style/close_button_color';
+
+    /**
+     * Configuration path for privacy policy link color
+     *
+     * @var string
+     */
+    public const PRIVACY_POLICY_COLOR = 'cookienotice/popup_style/privace_policy_color';
+
+    /**
+     * Configuration path for accept button text color
+     *
+     * @var string
+     */
+    public const ACCEPT_BUTTON_COLOR = 'cookienotice/popup_style/accept_button_color';
+
+    /**
+     * Configuration path for model title color
+     *
+     * @var string
+     */
+    public const MODEL_TITLE_COLOR = 'cookienotice/popup_style/model_title_color';
+
+    /**
+     * Check if cookie notice is enabled.
+     *
      * @return mixed
      */
     public function enableDisable()
@@ -179,6 +279,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get cookie notice type (bar or box).
+     *
      * @return mixed
      */
     public function getType()
@@ -190,6 +292,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get bar position setting.
+     *
      * @return mixed
      */
     public function getBarPosition()
@@ -201,6 +305,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get box position setting.
+     *
      * @return mixed
      */
     public function getBoxPosition()
@@ -212,6 +318,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get behaviour setting.
+     *
      * @return mixed
      */
     public function getBehaviour()
@@ -223,6 +331,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get auto hide delay value.
+     *
      * @return mixed
      */
     public function getAutohide()
@@ -234,6 +344,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get auto accept delay value.
+     *
      * @return mixed
      */
     public function getAutoAccept()
@@ -245,6 +357,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get cookie expiration value.
+     *
      * @return mixed
      */
     public function getAutoExpire()
@@ -256,6 +370,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get show setting (default or custom).
+     *
      * @return mixed
      */
     public function getShow()
@@ -267,6 +383,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get custom message text.
+     *
      * @return mixed
      */
     public function getCustomMessage()
@@ -278,6 +396,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get model title text.
+     *
      * @return mixed
      */
     public function modelTitle()
@@ -289,6 +409,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get custom accept button text.
+     *
      * @return mixed
      */
     public function getCustomAccept()
@@ -300,6 +422,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get custom decline button text.
+     *
      * @return mixed
      */
     public function getCustomDecline()
@@ -311,6 +435,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get new tab target setting.
+     *
      * @return mixed
      */
     public function newTab()
@@ -322,6 +448,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get on scroll setting.
+     *
      * @return mixed
      */
     public function onscroll()
@@ -333,6 +461,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get custom more info link text.
+     *
      * @return mixed
      */
     public function getCustomMoreInfo()
@@ -344,6 +474,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get CMS page identifier.
+     *
      * @return mixed
      */
     public function cmsPage()
@@ -355,6 +487,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get header text font family.
+     *
      * @return mixed
      */
     public function headerTextFontFamily()
@@ -366,6 +500,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get model text alignment.
+     *
      * @return mixed
      */
     public function modelTextAlign()
@@ -377,6 +513,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get model title font size.
+     *
      * @return mixed
      */
     public function modelTitleFontSize()
@@ -388,6 +526,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get model border setting.
+     *
      * @return mixed
      */
     public function modelBorder()
@@ -399,6 +539,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get container top border setting.
+     *
      * @return mixed
      */
     public function containerTopBorder()
@@ -410,6 +552,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get header bottom border setting.
+     *
      * @return mixed
      */
     public function headerBottomBorder()
@@ -421,6 +565,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get model border color.
+     *
      * @return mixed
      */
     public function modelBorderColor()
@@ -432,6 +578,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get model message font size.
+     *
      * @return mixed
      */
     public function modelMessageSize()
@@ -443,6 +591,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get header background color.
+     *
      * @return mixed
      */
     public function headerBackgroundColor()
@@ -454,6 +604,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get header font color.
+     *
      * @return mixed
      */
     public function headerFontColor()
@@ -465,6 +617,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get header bottom border color.
+     *
      * @return mixed
      */
     public function headerBottomBorderColor()
@@ -476,6 +630,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get container top border color.
+     *
      * @return mixed
      */
     public function containerTopBorderColor()
@@ -487,6 +643,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get accept button background color.
+     *
      * @return mixed
      */
     public function acceptButtonBackgroundColor()
@@ -498,6 +656,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get close button background color.
+     *
      * @return mixed
      */
     public function closeButtonBackgroundColor()
@@ -509,6 +669,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get policy button background color.
+     *
      * @return mixed
      */
     public function policyBackgroundColor()
@@ -520,6 +682,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get close button text color.
+     *
      * @return mixed
      */
     public function closeButtonColor()
@@ -531,6 +695,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get privacy policy link color.
+     *
      * @return mixed
      */
     public function privacyPolicyColor()
@@ -542,6 +708,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get accept button text color.
+     *
      * @return mixed
      */
     public function acceptButtonColor()
@@ -553,6 +721,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get model title color.
+     *
      * @return mixed
      */
     public function modelTitleColor()
