@@ -72,11 +72,11 @@
              style="<?= /* @noEscape */ $titleStyle ?>">
             <span class="titlecookie"
                   style="border-bottom:2px solid <?= /* @noEscape */ $acceptBg ?>;">
-            <?php if ($block->getShow() == 'default'):
-                echo 'Cookies and Privacy';
-            else:
-                echo $escaper->escapeHtml($block->modelTitle());
-            endif; ?>
+            <?php if ($block->getShow() == 'default'): ?>
+                <?= /* @noEscape */ __('Cookies and Privacy'); ?>
+            <?php else: ?>
+                <?= /* @noEscape */ $escaper->escapeHtml($block->modelTitle()) ?>
+            <?php endif; ?>
             </span>
         </div>
         <?php
@@ -87,11 +87,11 @@
         ?>
         <div id="message-custom-css" class="m-message custom-css"
              style="<?= /* @noEscape */ $msgStyle ?>">
-            <?php if ($block->getShow() == 'default'):
-                echo 'This website use cookies to ensure you get the best user experience on our website.';
-            else:
-                echo $escaper->escapeHtml($block->getCustomMessage());
-            endif; ?>
+            <?php if ($block->getShow() == 'default'): ?>
+                <?= /* @noEscape */ __('This website use cookies to ensure you get the best user experience on our website.'); ?>
+            <?php else: ?>
+                <?= /* @noEscape */ $escaper->escapeHtml($block->getCustomMessage()) ?>
+            <?php endif; ?>
         </div>
         <div id="action-custom-css" class="m-actions custom-css">
             <?php
@@ -102,11 +102,11 @@
             <a href="javascript:cookieNoticeAccept();"
                class="m-button m-accept"
                style="<?= /* @noEscape */ $acceptStyle ?>">
-                <?php if ($block->getShow() == 'default'):
-                    echo "Accept";
-                else:
-                    echo $escaper->escapeHtml($block->getCustomAccept());
-                endif; ?>
+                <?php if ($block->getShow() == 'default'): ?>
+                    <?= /* @noEscape */ __('Accept'); ?>
+                <?php else: ?>
+                    <?= /* @noEscape */ $escaper->escapeHtml($block->getCustomAccept()) ?>
+                <?php endif; ?>
             </a>
             <?php
             $closeStyle = 'background-color:'
@@ -117,11 +117,11 @@
             <a href="javascript:cookieClose();"
                class="m-button m-decline"
                style="<?= /* @noEscape */ $closeStyle ?>">
-                <?php if ($block->getShow() == 'default'):
-                    echo "Decline";
-                else:
-                    echo $escaper->escapeHtml($block->getCustomDecline());
-                endif; ?>
+                <?php if ($block->getShow() == 'default'): ?>
+                    <?= /* @noEscape */ __('Decline'); ?>
+                <?php else: ?>
+                    <?= /* @noEscape */ $escaper->escapeHtml($block->getCustomDecline()) ?>
+                <?php endif; ?>
             </a>
             <?php
             $policyUrl = $escaper->escapeUrl(
@@ -137,11 +137,11 @@
                target="<?= /* @noEscape */ $policyTarget ?>"
                class="m-button"
                style="<?= /* @noEscape */ $policyStyle ?>">
-                <?php if ($block->getShow() == 'default'):
-                    echo "Read our Privacy Policy";
-                else:
-                    echo $escaper->escapeHtml($block->getCustomMoreInfo());
-                endif; ?>
+                <?php if ($block->getShow() == 'default'): ?>
+                    <?= /* @noEscape */ __("Read our Privacy Policy"); ?>
+                <?php else: ?>
+                    <?= /* @noEscape */ $escaper->escapeHtml($block->getCustomMoreInfo()); ?>
+                <?php endif; ?>
             </a>
         </div>
     </div>

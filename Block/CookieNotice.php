@@ -62,8 +62,6 @@ class CookieNotice extends Template implements BlockInterface
      * Override addData to prevent widget data injection.
      *
      * @param array $arr
-     *
-     * @return void
      */
     public function addData(array $arr)
     {
@@ -75,8 +73,6 @@ class CookieNotice extends Template implements BlockInterface
      *
      * @param array|string $key
      * @param mixed $value
-     *
-     * @return void
      */
     public function setData($key, $value = null)
     {
